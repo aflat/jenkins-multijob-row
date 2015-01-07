@@ -1,0 +1,23 @@
+<j:jelly xmlns:j="jelly:core">
+  
+  <j:set var="downstreamJobName" value="${it.getDownstreamJobName(job)}"/>
+  <j:set var="downstreamJob" value="${it.getDownstreamJob(job)}"/>
+  
+  
+  <td>
+        <j:if test="${!downstreamJobName.isEmpty()}">
+            <j:set var="downstreamJobStatusURL" value="${it.getJobStatusUrl(downstreamJob)}"/>
+            <img src="${imagesURL}/${iconSize}/${downstreamJobStatusURL}" />
+            
+            <!--<img src="${imagesURL}/${iconSize}/${it.getLastBuild(downstreamJob).buildStatusUrl}" alt="${it.getLastBuild(downstreamJob).iconColor.description}"/>-->
+            
+            <a href="job/${downstreamJob.name}/lastBuild/console" title="${downstreamJob.name} Console">
+                <img src="${imagesURL}/${subIconSize}/terminal.gif" />
+            </a>  
+            
+           
+            
+        </j:if>
+        <a href="${h.getRelativeLinkTo(downstreamJob)}">${downstreamJob.name}</a>
+  </td>
+</j:jelly>
