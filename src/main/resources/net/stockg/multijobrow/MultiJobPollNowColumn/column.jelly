@@ -6,7 +6,8 @@
   
   <td>
          <a href="job/${job.name}/poll" title="${downstreamJob.name} Poll">
-                <img src="${imagesURL}/plugin/pollscm/images/${subIconSize}/clipboard-play.png" />
+                <img src="${resURL}/plugin/pollscm/images/24x24/clipboard-play.png"  width="${subIconSize}"/>
             </a>
+            
   </td>
 </j:jelly>

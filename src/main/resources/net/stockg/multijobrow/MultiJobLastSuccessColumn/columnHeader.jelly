@@ -1,3 +1,3 @@
 <j:jelly xmlns:j="jelly:core">
-    <th>Down Job Last Success</th>
+    <th>(D)Last Success</th>
 </j:jelly>

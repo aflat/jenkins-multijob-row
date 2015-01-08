@@ -5,6 +5,12 @@
   
   
   <td>
-       failure time
+       <j:choose>
+            <j:when test="${!downstreamJobName.isEmpty()}">
+                <j:set var="downstreamJob" value="${it.getDownstreamJob(job)}"/>
+                ${downstreamJob.getLastFailedBuild().getTimestampString()}
+            </j:when>
+            <j:otherwise>${job.getLastFailedBuild().getTimestampString()}</j:otherwise>
+         </j:choose>
   </td>
 </j:jelly>

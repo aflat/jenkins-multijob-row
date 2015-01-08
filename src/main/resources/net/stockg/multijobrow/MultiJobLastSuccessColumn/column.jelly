@@ -5,6 +5,13 @@
   
   
   <td>
-        success time
+        
+        <j:choose>
+            <j:when test="${!downstreamJobName.isEmpty()}">
+                <j:set var="downstreamJob" value="${it.getDownstreamJob(job)}"/>
+                ${downstreamJob.getLastSuccessfulBuild().getTimestampString()}
+            </j:when>
+            <j:otherwise>${job.getLastSuccessfulBuild().getTimestampString()}</j:otherwise>
+         </j:choose>
   </td>
 </j:jelly>

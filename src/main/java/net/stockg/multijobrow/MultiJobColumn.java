@@ -55,7 +55,7 @@ public class MultiJobColumn extends ListViewColumn{
 	
 	
     public String getMultiJobs(Job job){
-       
+       //job.getLastSuccessfulBuild()
     	return "multiJOBBBBB";
     }
     

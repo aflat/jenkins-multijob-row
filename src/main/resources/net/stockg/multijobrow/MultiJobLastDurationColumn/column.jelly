@@ -1,10 +1,18 @@
 <j:jelly xmlns:j="jelly:core">
   
   <j:set var="downstreamJobName" value="${it.getDownstreamJobName(job)}"/>
-  <j:set var="downstreamJob" value="${it.getDownstreamJob(job)}"/>
+  
   
   
   <td>
-       duration
+
+        
+        <j:choose>
+            <j:when test="${!downstreamJobName.isEmpty()}">
+                <j:set var="downstreamJob" value="${it.getDownstreamJob(job)}"/>
+                ${downstreamJob.getLastBuild().getDurationString()}
+            </j:when>
+            <j:otherwise>${job.getLastBuild().getDurationString()}</j:otherwise>
+         </j:choose>
   </td>
 </j:jelly>
