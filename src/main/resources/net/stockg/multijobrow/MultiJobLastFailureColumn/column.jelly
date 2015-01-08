@@ -1,0 +1,10 @@
+<j:jelly xmlns:j="jelly:core">
+  
+  <j:set var="downstreamJobName" value="${it.getDownstreamJobName(job)}"/>
+  <j:set var="downstreamJob" value="${it.getDownstreamJob(job)}"/>
+  
+  
+  <td>
+       failure time
+  </td>
+</j:jelly>

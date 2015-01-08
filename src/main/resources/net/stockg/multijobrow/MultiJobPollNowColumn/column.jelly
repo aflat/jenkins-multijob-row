@@ -1,0 +1,12 @@
+<j:jelly xmlns:j="jelly:core">
+  
+  <j:set var="downstreamJobName" value="${it.getDownstreamJobName(job)}"/>
+  <j:set var="downstreamJob" value="${it.getDownstreamJob(job)}"/>
+  
+  
+  <td>
+         <a href="job/${job.name}/poll" title="${downstreamJob.name} Poll">
+                <img src="${imagesURL}/plugin/pollscm/images/${subIconSize}/clipboard-play.png" />
+            </a>
+  </td>
+</j:jelly>

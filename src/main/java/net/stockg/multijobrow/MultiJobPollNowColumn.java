@@ -48,10 +48,10 @@ import org.kohsuke.stapler.export.Exported;
  *
  * @author gstockfisch
  */
-public class MultiJobColumn extends ListViewColumn{
+public class MultiJobPollNowColumn extends ListViewColumn{
     
 
-    public static Logger LOGGER = Logger.getLogger(MultiJobColumn.class.getSimpleName());
+    public static Logger LOGGER = Logger.getLogger(MultiJobPollNowColumn.class.getSimpleName());
 	
 	
     public String getMultiJobs(Job job){
@@ -107,12 +107,12 @@ public class MultiJobColumn extends ListViewColumn{
     public static final class DescriptorImpl extends ListViewColumnDescriptor {
         @Override
         public ListViewColumn newInstance(StaplerRequest req, JSONObject formData){
-        	return new MultiJobColumn();
+        	return new MultiJobPollNowColumn();
         }
         
 		@Override
 		public String getDisplayName(){
-			return "Downstream Job";
+			return "Poll Now";
 		}
         
         @Override
