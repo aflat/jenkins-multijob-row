@@ -1,17 +1,36 @@
-<j:jelly xmlns:j="jelly:core">
-  
-  <j:set var="downstreamJobName" value="${it.getDownstreamJobName(job)}"/>
-  <j:set var="downstreamJob" value="${it.getDownstreamJob(job)}"/>
-  
-  
-  <td>
-        
+<?jelly escape-by-default='true'?>
+<j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define" xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:f="/lib/form" xmlns:i="jelly:fmt">
+
+    <j:set var="downstreamJobName" value="${it.getDownstreamJobName(job)}"/>
+    <j:set var="downstreamJob" value="${it.getDownstreamJob(job)}"/>
         <j:choose>
             <j:when test="${!downstreamJobName.isEmpty()}">
-                <j:set var="downstreamJob" value="${it.getDownstreamJob(job)}"/>
-                ${downstreamJob.getLastSuccessfulBuild().getTimestampString()}
-            </j:when>
-            <j:otherwise>${job.getLastSuccessfulBuild().getTimestampString()}</j:otherwise>
-         </j:choose>
-  </td>
+                <j:set var="lsBuild" value="${downstreamJob.lastSuccessfulBuild}"/>
+                <td data="${lsBuild.timestampString2 ?: '-'}">
+                    <j:choose>
+                        <j:when test="${lsBuild!=null}">
+                        ${lsBuild.timestampString}
+                        - <a href="${downstreamJob.getUrl()}${downstreamJob.shortUrl}lastSuccessfulBuild/" class="model-link inside">${lsBuild.displayName}</a>
+                        </j:when>
+                        <j:otherwise>
+                        ${%N/A}
+                        </j:otherwise>
+                    </j:choose>
+                </td>
+             </j:when>
+            <j:otherwise>
+                <j:set var="lsBuild" value="${job.lastSuccessfulBuild}"/>
+                <td data="${lsBuild.timestampString2 ?: '-'}">
+                    <j:choose>
+                        <j:when test="${lsBuild!=null}">
+                        ${lsBuild.timestampString}
+                        - <a href="${jobBaseUrl}${job.shortUrl}lastSuccessfulBuild/" class="model-link inside">${lsBuild.displayName}</a>
+                        </j:when>
+                        <j:otherwise>
+                        ${%N/A}
+                        </j:otherwise>
+                    </j:choose>
+                </td>
+            </j:otherwise>
+        </j:choose>
 </j:jelly>
