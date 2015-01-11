@@ -41,6 +41,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import jenkins.model.Jenkins;
 import net.sf.json.JSONObject;
+import static net.stockg.multijobrow.MultiJobColumn.LOGGER;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.export.Exported;
 
@@ -57,6 +58,39 @@ public class MultiJobLastSuccessColumn extends ListViewColumn{
     public String getMultiJobs(Job job){
        
     	return "multiJOBBBBB";
+    }
+        public String getDownstreamJobName(Job job){
+        List<AbstractProject> jobs = Jenkins.getInstance().getDependencyGraph().getDownstream((AbstractProject) job);
+        String jobName = new String();
+        LOGGER.info("Upstream job name " + job.getName());
+        if(null != jobs && jobs.size() > 0){
+            LOGGER.info("Downstream job count " + Integer.toString(jobs.size()));
+            jobName = jobs.get(0).getDisplayName();
+        }
+        LOGGER.info("Downstream job name " + jobName);
+    	return jobName;
+    }
+    
+    public AbstractProject getDownstreamJob(Job job){
+        List<AbstractProject> jobs = Jenkins.getInstance().getDependencyGraph().getDownstream((AbstractProject) job);
+        AbstractProject downstreamJob = null;
+        
+        LOGGER.info("Upstream job name " + job.getName());
+        if(null != jobs && jobs.size() > 0){
+            LOGGER.info("Downstream job count " + Integer.toString(jobs.size()));
+            downstreamJob = jobs.get(0);
+            
+        }
+        if(null != downstreamJob){
+            LOGGER.info("Downstream job name " + downstreamJob.getDisplayName());
+        }
+    	return downstreamJob;
+    }
+    
+    public String getJobStatusUrl(Job job) {
+        LOGGER.info("Geting statusURL " + job.getBuildStatusUrl());
+        LOGGER.info("Geting statusURL icon: " + job.getLastBuild().getBuildStatusIconClassName());
+        return job.getBuildStatusUrl();
     }
     @Extension
     public static final class DescriptorImpl extends ListViewColumnDescriptor {
